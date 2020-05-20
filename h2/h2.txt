@@ -1,0 +1,45 @@
+CS457/557 Fall 2019 HW #2	10 Points / 1pt each
+
+Using the schema provided answer the following questions in SQL.  Your answers
+should work in the general case, not just for the example data provided.  The
+Schema column is the relation that should be returned by your select query.
+
+	Schema		Description:
+------------------------------------------------------------------------
+ 1 (iid,price,inven)	All items for which there were no orders.
+ 2 (saddr)		All states where there is either a supplier or a
+			  customer (or both).
+ 3 Item			All items ordered by customer 200.
+ 4 Item			All items ordered by customer 200 and supplied by
+			  supplier 100.
+ 5 Order		All orders for items where the quantity was greater than
+			  the inventory for that item.
+ 6 Item			All items that were not ordered by any customer in
+			  Indiana.
+ 7 Order		All orders for which the total is incorrect.
+ 8 Order		All orders from IN (customer address) where the total is
+			  more than 20.00.
+ 9 (cname)		The names of all customers who purchased more than one
+			  item.
+10 (total)		The sum total value of all items in inventory.
+
+1) select item.iid, item.price, item.inven from 'order' left join item where oid=NULL
+
+2) select distinct saddr from supplier left join Customer on customer.caddr = supplier.saddr
+
+3) select item.* from item natural join 'order' where cid=200
+
+4) select item.* from item natural join 'order' natural join Supplier where cid=200 and sid=100
+
+5) select 'order'.* from 'order' natural join item where quantity>inven
+
+6)
+
+7) select 'order'.* from 'order' natural join item where 'total' != quantity * price
+
+8) select 'order'.* from 'order' natural join customer where total > 20.00 and caddr = 'IN'
+
+9) select cname from customer natural join 'order' where quantity > 1
+
+10) select sum(price * inven) from item
+

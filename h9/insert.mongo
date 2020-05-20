@@ -1,0 +1,3 @@
+db = db.getSiblingDB('cs45700');
+db.auth('cs45700', 'uhdopfdr');
+

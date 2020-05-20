@@ -1,0 +1,61 @@
+CS457/557 Spring 2019 HW #5	10+ points
+
+For this assignment edit the C file 'mkpkgdb.c' which will create and populate
+two tables: "packages" and "files", in SQLite using the C interface.
+
+The packages table should have the following columns:
+ pid		- The package id, a auto-incremented integer that is also the
+		  primary key.
+ fullname	- The full name of the package (ex: coreutils-8.25-x86_64-2)
+ name		- The name of the package (ex: coreutils)
+ version	- The software version (ex: 8.25)
+ arch		- The architecture (ex: x86_64, noarch)
+ pkgversion	- The package version (ex: 2)
+ custom		- Custom package identifier (ex: SBo, ponce, etc)
+ location	- Package location (from the file)
+ description	- Package description (from the file, minus the package name
+		  from each line)
+ mdsum		- The md5sum of the package file (leave blank for now)
+ csize		- Compressed size (from the file)
+ ucsize		- Uncompressed size (from the file)
+
+Most of the above should be text columns, except for the pkgversion and pid
+which should be integers. In general split the package name into words separated
+by dashes (-) and work backwards from the end.
+
+The files table should have the following columns:
+  pid		- A foreign key reference to the package id this file belongs to
+  path		- Path (minus root (/)) for the file/directory (from the package
+		  file)
+  type		- The file-type (from stat: '-', 'd', etc)
+  mimetype	- Output from file command
+  mode		- (int) File permissions (from stat)
+  user		- Owner of the file (from passwd file)
+  uid		- (int) Owner uid
+  `group`	- Group owner of the file (from group file)
+  gid		- (int) Group gid
+  size		- (int) Size of file in bytes (from stat)
+  mtime		- (int) Last modification time (in seconds) (from stat)
+  mdsum		- md5sum of the file (if a regular file) (from md5sum command)
+
+Your program should attempt to open a sqlite database file called "pkgs.db" in
+the current directory and create the above tables if they do not exist, or drop
+and recreate them if they do, and then read the files in the
+  /var/lib/pkgtools/packages
+directory and populate the above tables with the information found within them
+and using the system calls and command line programs that I have shown how to
+use in class.
+
+While populating the files table you may ignore any path that begins with
+'install/' as those files are removed upon installation.  You should also ignore
+the path './' which is usually the first path.
+
+Your program should print some status information as it processes the files,
+such as which package it is currently working on (and out of how many), you
+may add a -v command line switch option for more verbosity for some tiny amount
+of extra credit.
+
+If you dream up any other extra features (that are actually relevant to this
+assignment) document them at the top of your source file and I will consider
+them for extra credit.
+

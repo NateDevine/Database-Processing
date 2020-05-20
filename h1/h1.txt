@@ -1,0 +1,42 @@
+CS457/557 Fall 2019 HW #1	10 Points / 1pt each
+
+Using the schema provided answer the following questions in SQL.  Your answers
+should work in the general case, not just for the example data provided.  The
+Schema column is the relation that should be returned by your select query.
+
+	Schema		Description:
+------------------------------------------------------------------------
+ 1 Supplier		All suppliers in Indiana (IN).
+ 2 Item			All items that cost less than 2.50.
+ 3 Order		All orders from Indiana with a total cost of at least
+			  10.00.
+ 4 (cname, caddr)	All customers who live in Indiana or Ohio.
+ 5 (iid,idescr,price)	All items with an inventory of zero.
+ 6 Order		All orders for items that cost more than 10.00 each.
+ 7 (sid,iid)		All suppliers of items with an inventory of zero.
+ 8 (oid,iid,cid,sid)	All orders where there is a supplier of the item in the
+			  same state as the customer.
+ 9 (cid,cname)		All customers who ordered an item made by supplier 100.
+10 (cid,cname)		All customers who did not order an item made by supplier
+			  100.
+
+1) SELECT * FROM Supplier WHERE saddr='IN';
+
+2) SELECT * FROM Item WHERE price<=2.50;
+
+3) select cname, caddr from Customer natural join "Order"  where Customer.caddr = 'IN' and "Order".total>=10.00
+
+4) select cname from Customer where caddr="IN" OR caddr="OH";
+
+5) select iid,idescr from item where inven=0
+
+6) select * from "Order" where total>10.00;
+
+7) select sid, iid from Supplier natural join Item where inven=0
+
+8) select oid,iid,cid,sid from Supplier natural join Customer natural join "Order" where Customer.caddr=Supplier.saddr
+
+9) select cid, cname from Customer natural join "Order" natural join Supply where Supply.sid=100
+
+10) select cid, cname from Customer natural join "Order" natural join Supply where Supply.sid!=100
+

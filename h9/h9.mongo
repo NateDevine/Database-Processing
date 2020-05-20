@@ -1,0 +1,37 @@
+db = db.getSiblingDB('cs45700');
+db.auth('cs45700', 'uhdopfdr');
+
+// Find all shops
+print("1)");
+
+// Find all people (limit 10).
+print("2)");
+
+// Find all people who are at least 70.
+print("3)");
+
+// Find all people whose name contains the string "ste".
+print("4)");
+
+// Find all people whose name begins with the string "st".
+print("5)");
+
+// Find all people who drink kona. Count them.
+print("6)");
+
+// Find the people who visit only one shop.
+print("7)");
+
+// Find the people drink only one coffee and visit only one shop.
+print("8)");
+
+// Find the count number of people of each sex (Male, then Female):
+print("9)");
+
+// Find the most popular coffee shops.
+print("10)");
+
+// Find the number of people who visit exactly n shops, for each integer n from
+// 1 to 10:
+print("11)");
+

@@ -1,0 +1,36 @@
+CS457/557 Spring 2019 HW #4
+
+Using the following schema (and provided coffee.sql file):
+    Drinks(name,coffee)
+    People(name,age,gender)
+    Serves(shop,coffee,price)
+    Visits(name,shop)
+
+Put your solutions in the SQLite script named h4.sql. Number the problems using
+comments. In SQL anything following two dashes ('--') on a line is a comment.
+
+ 1) (1pt) Display a listing of all shops with the minimum, maximum and average
+    age (rounded to 2 decimal places) (shop, min, max, average) of their
+    visitors and order the output by increasing average age.
+
+ 2) (1pt) Produce a top 10 ranking (from most favored to least) of coffees
+    favored by women.
+
+ 3) (2pts) Insert a new person (you!) into your data base and add yourself to
+    the list that likes 'kona' and 'bombon', and that visits 'the little cafe',
+    'the busy bean', and 'the hideout'.
+
+ 4) (1pt) Raise the price of all coffees by ten percent (UPDATE).
+
+ 5) (1pt) Delete all 18 year olds from the list of people (in all tables).
+
+ 6) (1pt) Delete 'decaffeinated' from the list of coffees (again, all tables).
+
+ 7) (1pt) Create a view that shows all the available drinks and a count of the
+    number of people that drink it.  The view should have two columns, coffee
+    and count.
+
+ 8) (2pts) Create a new table with each person listed once. Show the name and
+    age of the person, the most expensive coffee they drink that is served at a
+    place they visit. So the new table has five columns: name, age, coffee,
+    shop, price.

@@ -1,0 +1,20 @@
+CS457/557 Fall 2019 HW #9 (15 points)
+
+0) (1pt) Edit insert.mongo, and make a mongo script to add the file
+   CoffeePeople.json to a collection called coffee, and add the file
+   CoffeeShops.json to the same collection.
+   - You can do this in mongo shell using the cat() function to read a file as 
+     a string, then use .split() method to split the string into an array of
+     lines, then for each line, use JSON.parse() to parse it into a JavaScript
+     value and insert it into the collection.
+
+1) (11pts) Edit the h9.mongo and read the comments and add the mongo 
+   statements to do what the comments say to do.
+
+2) (3pts) Insert a new person (yourself!), omit the lists of drinks and visits.
+   a) Add empty drinks and visits lists for the new person.
+   b) Add kona to the drinks list for the new person.
+   c) Add cafe plus to the visits list for the new person.
+   d) Using one query, add cafe java to the visits list and columbian to the
+      drinks list for the new person.
+

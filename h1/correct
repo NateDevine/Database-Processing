@@ -1,0 +1,10 @@
+1 ) select * from Supplier where saddr="IN"
+2 ) select * from Item where price < 2.5
+3 ) select 'Order'.* from 'Order' natural join Customer where Customer.cddr='IN' AND 'Order'.total >= 10.00
+4 ) select cname,caddr from Customer where caddr='IN' or addr='OH'
+5 ) select iid,idescr,price from Item where inven=0
+6 ) select 'order'.* from 'order' natural join Item where prive > 10
+7 ) select sid, iid from Supply natural join Item where inven=0
+8 ) select oid,`Order`.iid,`Order`.cid,Supply.sid from `Order` natural join Supply natural join Customer natural join Supplier where saddr = caddr;
+9 ) select distinct cid,cname from Customer natural join 'Order' natural join Supply where sid=100
+10) select cid,cname from Customer where cid not in (select distinct Customer.cid from Customer natural join `Order` natural join Supply where sid = 100);

@@ -1,0 +1,67 @@
+CS457/557 Fall 2019 HW #2	10 Points / 1pt each
+
+Using the schema provided answer the following questions in SQL.  Your answers
+should work in the general case, not just for the example data provided.  The
+Schema column is the relation that should be returned by your select query.
+
+	Schema		Description:
+------------------------------------------------------------------------
+ 1 (iid,price,inven)	All items for which there were no orders.
+ 2 (saddr)		All states where there is either a supplier or a
+			  customer (or both).
+ 3 Item			All items ordered by customer 200.
+ 4 Item			All items ordered by customer 200 and supplied by
+			  supplier 100.
+ 5 Order		All orders for items where the quantity was greater than
+			  the inventory for that item.
+ 6 Item			All items that were not ordered by any customer in
+			  Indiana.
+ 7 Order		All orders for which the total is incorrect.
+ 8 Order		All orders from IN (customer address) where the total is
+			  more than 20.00.
+ 9 (cname)		The names of all customers who purchased more than one
+			  item.
+10 (total)		The sum total value of all items in inventory.
+
+1)
+select iid,price,inven
+ from Item where iid not in 
+  (select distinct iid from Item natural join `Order`)
+
+2)
+select caddr from Customer
+union
+select saddr as caddr from Supplier
+
+3)
+select * from Item natural join
+(select iid from `Order` where cid=200)
+
+4)
+select * from Item natural join
+(select iid from `Order` where cid=200) natural join
+(select iid from Supply where sid=100)
+
+5)
+select `Order`.* from `Order` natural join Item where quantity > inven
+
+6)
+select * from Item where iid not in
+(select iid from `Order` natural join Customer where caddr = 'IN')
+
+7)
+select * from `Order` natural join Item where quantity *price != total
+
+8)
+select `Order`.* from `Order` natural join Customer
+ where caddr = "IN" and total > 20
+
+9)
+select cname from Customer natural join 
+(select *,count(cname) as count from `Order` natural join Customer
+group by cname
+having count > 1)
+
+10)
+select sum(price*inven) as total from Item
+
